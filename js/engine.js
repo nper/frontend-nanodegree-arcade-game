@@ -80,7 +80,14 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        
+        // collisions are checked within player's update
         // checkCollisions();
+        
+        if (!player.alive) {
+            // Reset when the game is over (player wins or die)
+            reset();
+        }
     }
 
     /* This is called by the update function  and loops through all of the
@@ -160,7 +167,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        player.reset(); // reset the player position
     }
 
     /* Go ahead and load all of the images we know we're going to need to
